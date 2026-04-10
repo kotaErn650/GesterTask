@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:GesterTask.ViewModels"
+             xmlns:converters="clr-namespace:GesterTask.Converters"
+             x:Class="GesterTask.Views.TaskDetailPage"
+             x:DataType="vm:TaskDetailViewModel"
+             Title="Detalle de Tarea">
+
+    <ContentPage.Resources>
+        <converters:StatusToColorConverter x:Key="StatusToColorConverter" />
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+
+            <!-- Status indicator banner -->
+            <Border StrokeShape="RoundRectangle 12"
+                    Stroke="Transparent"
+                    BackgroundColor="{Binding IsCompleted, Converter={StaticResource StatusToColorConverter}}"
+                    Padding="14,10">
+                <Label Text="{Binding IsCompleted, StringFormat='Estado: {0}'}"
+                       FontSize="15"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center" />
+            </Border>
+
+            <!-- Title -->
+            <Border StrokeShape="RoundRectangle 12"
+                    Stroke="{AppThemeBinding Light=#DDD, Dark=#444}"
+                    Padding="16"
+                    BackgroundColor="{AppThemeBinding Light=#FAFAFA, Dark=#2A2A2A}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Título"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#888, Dark=#AAA}" />
+                    <Label Text="{Binding Titulo}"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Description -->
+            <Border StrokeShape="RoundRectangle 12"
+                    Stroke="{AppThemeBinding Light=#DDD, Dark=#444}"
+                    Padding="16"
+                    BackgroundColor="{AppThemeBinding Light=#FAFAFA, Dark=#2A2A2A}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Descripción"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#888, Dark=#AAA}" />
+                    <Label Text="{Binding Descripcion}"
+                           FontSize="15"
+                           TextColor="{AppThemeBinding Light=#333, Dark=#DDD}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Category -->
+            <Border StrokeShape="RoundRectangle 12"
+                    Stroke="{AppThemeBinding Light=#DDD, Dark=#444}"
+                    Padding="16"
+                    BackgroundColor="{AppThemeBinding Light=#FAFAFA, Dark=#2A2A2A}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Categoría"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#888, Dark=#AAA}" />
+                    <Label Text="{Binding CategoryName}"
+                           FontSize="15"
+                           TextColor="{AppThemeBinding Light=#333, Dark=#DDD}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Completion Toggle -->
+            <Border StrokeShape="RoundRectangle 12"
+                    Stroke="{AppThemeBinding Light=#DDD, Dark=#444}"
+                    Padding="16"
+                    BackgroundColor="{AppThemeBinding Light=#FAFAFA, Dark=#2A2A2A}">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                    <VerticalStackLayout Grid.Column="0" Spacing="4">
+                        <Label Text="Marcar como completada"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                        <Label Text="Activa o desactiva el estado de la tarea"
+                               FontSize="12"
+                               TextColor="{AppThemeBinding Light=#888, Dark=#AAA}" />
+                    </VerticalStackLayout>
+                    <Switch Grid.Column="1"
+                            IsToggled="{Binding IsCompleted, Mode=TwoWay}"
+                            OnColor="Green"
+                            VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Back Button -->
+            <Button Text="← Volver a Mis Tareas"
+                    Command="{Binding GoBackCommand}"
+                    BackgroundColor="{AppThemeBinding Light=#512BD4, Dark=#6A3FE0}"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    FontSize="16"
+                    Margin="0,10,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
