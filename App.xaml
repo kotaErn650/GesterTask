@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:GesterTask.Converters"
+             xmlns:vm="clr-namespace:GesterTask.ViewModels"
+             x:Class="GesterTask.App">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Converters -->
+            <converters:StatusToColorConverter x:Key="StatusToColorConverter" />
+
+            <!-- Global DataTemplate for TaskItemViewModel -->
+            <DataTemplate x:Key="TaskItemTemplate" x:DataType="vm:TaskItemViewModel">
+                <Grid ColumnDefinitions="Auto,*,Auto"
+                      Padding="12,10"
+                      ColumnSpacing="12">
+
+                    <!-- Color indicator -->
+                    <BoxView Grid.Column="0"
+                             WidthRequest="8"
+                             HeightRequest="8"
+                             CornerRadius="4"
+                             VerticalOptions="Center"
+                             Color="{Binding IsCompleted, Converter={StaticResource StatusToColorConverter}}" />
+
+                    <!-- Task title -->
+                    <Label Grid.Column="1"
+                           Text="{Binding Titulo}"
+                           FontSize="16"
+                           VerticalOptions="Center"
+                           TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+
+                    <!-- Status dot -->
+                    <BoxView Grid.Column="2"
+                             WidthRequest="12"
+                             HeightRequest="12"
+                             CornerRadius="6"
+                             VerticalOptions="Center"
+                             Color="{Binding IsCompleted, Converter={StaticResource StatusToColorConverter}}" />
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>

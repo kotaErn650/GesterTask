@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:pages="clr-namespace:GesterTask"
+       xmlns:views="clr-namespace:GesterTask.Views"
+       x:Class="GesterTask.AppShell"
+       FlyoutBehavior="Flyout"
+       Shell.TabBarIsVisible="True">
+
+    <!-- Flyout Header -->
+    <Shell.FlyoutHeader>
+        <Grid BackgroundColor="{AppThemeBinding Light=#512BD4, Dark=#333}"
+              Padding="20"
+              HeightRequest="160">
+            <VerticalStackLayout VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 Spacing="8">
+                <Image Source="app_icon.svg"
+                       HeightRequest="70"
+                       WidthRequest="70"
+                       HorizontalOptions="Center" />
+                <Label Text="GesterTask"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <!-- Flyout Footer -->
+    <Shell.FlyoutFooter>
+        <Grid BackgroundColor="{AppThemeBinding Light=#F0F0F0, Dark=#222}"
+              Padding="16,12">
+            <VerticalStackLayout HorizontalOptions="Center"
+                                 Spacing="2">
+                <Label Text="GesterTask"
+                       FontSize="13"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="{AppThemeBinding Light=#444, Dark=#CCC}" />
+                <Label Text="Versión 1.0"
+                       FontSize="11"
+                       HorizontalOptions="Center"
+                       TextColor="{AppThemeBinding Light=#888, Dark=#999}" />
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.FlyoutFooter>
+
+    <!-- Bottom Tabs -->
+    <TabBar>
+        <ShellContent Title="Resumen"
+                      Icon="icon_summary.svg"
+                      ContentTemplate="{DataTemplate pages:MainPage}"
+                      Route="main" />
+
+        <ShellContent Title="Mis Tareas"
+                      Icon="icon_tasks.svg"
+                      ContentTemplate="{DataTemplate views:TasksPage}"
+                      Route="tasks" />
+    </TabBar>
+
+</Shell>
