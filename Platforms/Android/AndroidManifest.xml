@@ -7,7 +7,7 @@
         android:supportsRtl="true"
         android:label="GesterTask">
         <activity android:exported="true"
-                  android:name="gestertask.MainActivity" />
+                  android:name="GesterTask.MainActivity" />
     </application>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />

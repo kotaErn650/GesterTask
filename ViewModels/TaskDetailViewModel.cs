@@ -72,7 +72,8 @@ public class TaskDetailViewModel : BindingUtilObject, IQueryAttributable
         Id = task.Id;
         Titulo = task.Titulo;
         Descripcion = task.Descripcion;
-        IsCompleted = task.IsCompleted;
+        _isCompleted = task.IsCompleted;
+        OnPropertyChanged(nameof(IsCompleted));
         CategoryName = category?.Nombre ?? "Sin categoría";
     }
 

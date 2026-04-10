@@ -44,8 +44,7 @@ public class TasksViewModel : BindingUtilObject
     public void LoadTasks()
     {
         var all = _dbContext.Tasks.ToList()
-                      .Select(t => new TaskItemViewModel(t))
-                      .ToList();
+                      .Select(t => new TaskItemViewModel(t));
 
         Tasks = new ObservableCollection<TaskItemViewModel>(all);
     }
