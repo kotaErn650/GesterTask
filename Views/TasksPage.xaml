@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:GesterTask.ViewModels"
+             xmlns:handlers="clr-namespace:GesterTask.Handlers"
+             x:Class="GesterTask.Views.TasksPage"
+             x:DataType="vm:TasksViewModel"
+             Title="Mis Tareas">
+
+    <Shell.SearchHandler>
+        <handlers:TaskSearchHandler Placeholder="Buscar tarea por título..."
+                                    ShowsResults="False"
+                                    x:Name="SearchHandlerRef" />
+    </Shell.SearchHandler>
+
+    <Grid RowDefinitions="*">
+        <CollectionView Grid.Row="0"
+                        ItemsSource="{Binding Tasks}"
+                        ItemTemplate="{StaticResource TaskItemTemplate}"
+                        SelectionMode="Single"
+                        SelectionChangedCommand="{Binding NavigateToDetailCommand}"
+                        SelectionChangedCommandParameter="{Binding SelectedItem, Source={RelativeSource Self}}">
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout VerticalOptions="Center"
+                                     HorizontalOptions="Center"
+                                     Spacing="12"
+                                     Padding="20">
+                    <Label Text="🔍"
+                           FontSize="48"
+                           HorizontalOptions="Center" />
+                    <Label Text="No se encontraron tareas"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="{AppThemeBinding Light=#888, Dark=#AAA}" />
+                    <Label Text="Intenta con otro término de búsqueda."
+                           FontSize="14"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{AppThemeBinding Light=#AAA, Dark=#777}" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.Header>
+                <Grid Padding="16,14,16,6">
+                    <Label Text="Lista de Tareas"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#512BD4, Dark=#9B7FFF}" />
+                </Grid>
+            </CollectionView.Header>
+
+        </CollectionView>
+    </Grid>
+
+</ContentPage>
